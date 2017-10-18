@@ -5,7 +5,19 @@ var Sequelize = require('sequelize');
 var db = require('../index');
 
 var Campus = db.define('campus', {
-  name: Sequelize.STRING
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  image: {
+    type: Sequelize.STRING,
+    validate: {
+      isUrl: true
+    }
+  }
 });
 
 Campus.getAll = function () {

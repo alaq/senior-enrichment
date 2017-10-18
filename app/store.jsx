@@ -1,20 +1,26 @@
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
+// import rootReducer from './reducers'; // I want to break up the reducers
 import createLogger from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
 
-import { GET_CAMPUSES } from './actions/studentActionCreators';
+import { GET_CAMPUSES } from './actions/campusActionCreators';
+import { GET_STUDENTS } from './actions/studentActionCreators';
 
 const initialState = {
   campuses: [],
-  isEmpty: true
+  students: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CAMPUSES:
-      const newState = Object.assign({}, state, {campuses: action.payload})
-      return newState;
+      return Object.assign({}, state, {campuses: action.payload});
+
+    case GET_STUDENTS:
+      return Object.assign({}, state, {students: action.payload});
+
+      case GET_STUDENTS_OF_CAMPUS:
+      return Object.assign({}, state, {students: action.payload});
 
     default:
       return state;
@@ -23,4 +29,4 @@ const reducer = (state = initialState, action) => {
 };
 
 
-export default createStore(rootReducer, applyMiddleware(thunkMiddleware, createLogger()));
+export default createStore(reducer, applyMiddleware(thunkMiddleware, createLogger()));
