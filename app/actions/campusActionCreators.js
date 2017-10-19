@@ -22,3 +22,12 @@ export const loadCampus = (id) => dispatch => {
   })
   .catch(error => console.log(error));
 };
+
+export const removeCampus = (campusId) => dispatch => {
+  axios.delete('/api/campus/' + campusId)
+  .then(response => response.data)
+  .then(data => {
+    dispatch({type: REMOVE_CAMPUS, payload: data });
+  })
+  .catch(error => console.log(error));
+};

@@ -12,19 +12,19 @@ class StudentList extends Component {
 
   render () {
     const { students } = this.props;
-    console.log('students:', students);
-    return ( 
+    return (
       <div>
-          <h1>List of students</h1>
           {students && students.map(student => <StudentItem key={student.id} student={student} />)}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  students: state.students
-});
+const mapStateToProps = (state) =>
+  {
+    const students = state.students;
+    return {students, state};
+  };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchStudents: () => dispatch(loadStudents())

@@ -2,7 +2,8 @@ import axios from 'axios';
 
 export const GET_STUDENTS = 'GET_STUDENTS';
 export const GET_STUDENT = 'GET_STUDENT';
-export const REMOVE_STUDENTS = 'DELETE_STUDENT';
+export const UPDATE_STUDENT = 'UPDATE_STUDENT';
+export const REMOVE_STUDENT = 'REMOVE_STUDENT';
 
 export const loadStudents = () => dispatch => {
   axios.get('/api/student/')
@@ -22,12 +23,21 @@ export const loadStudent = (id) => dispatch => {
   .catch(error => console.log(error));
 };
 
-export const deleteStudent = (studentId) => dispatch => {
+export const removeStudent = (studentId) => dispatch => {
   axios.delete('/api/student/' + studentId)
   .then(response => response.data)
   .then(data => {
-    dispatch({type: GET_STUDENTS, payload: data });
+    dispatch({type: REMOVE_STUDENT, payload: data });
   })
   .catch(error => console.log(error));
 };
-// THIS NEEDS TO BE COMPLETED WITH THE CORRECT RESPONSE
+
+export const updateStudent = (student) => dispatch => {
+  axios.put('/api/student/' + student.id, {student})
+  .then(response => response.data)
+  .then(data => {
+    console.log('response from backend', data);
+    dispatch({type: UPDATE_STUDENT, payload: data });
+  })
+  .catch(error => console.log(error));
+};

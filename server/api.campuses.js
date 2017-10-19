@@ -31,7 +31,7 @@ campusRouter.get('/:id', (req, res) => {
 
 campusRouter.delete('/:id', (req, res) => {
 	req.requestedCampus.destroy()
-		.then(() => res.sendStatus(200))
+		.then(() => res.send(req.requestedCampus))
 		.catch(console.error);
 });
 

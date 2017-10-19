@@ -8,8 +8,9 @@ var Campus = db.define('campus', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    // unique: true,
     validate: {
-      notEmpty: true
+      notEmpty: true,
     }
   },
   image: {

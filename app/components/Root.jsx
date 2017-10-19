@@ -13,7 +13,7 @@ class Root extends Component {
 componentDidMount () {
   this.props.fetchInitialData();
 }
-  
+
 
   render () {
     return (
@@ -38,7 +38,7 @@ componentDidMount () {
       </div>
     );
   }
-};
+}
 
 const mapProps = null;
 

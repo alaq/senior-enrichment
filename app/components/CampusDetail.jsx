@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadCampus } from '../actions/campusActionCreators';
+import { loadCampus, removeCampus } from '../actions/campusActionCreators';
 import CampusList from './CampusList';
+import StudentList from './StudentList';
 
 class CampusDetail extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      campus: {
-        name: 'aa',
-        id: '1',
-        image: ''
-      }
-    }
+    this.onSubmitDelete = this.onSubmitDelete.bind(this);
   }
+
 
   componentDidMount () {
     // here will go the function to fetch the campus details
@@ -33,14 +30,34 @@ class CampusDetail extends Component {
 
   }
 
+  onSubmitDelete (e) {
+    // console.dir(e.target.value);
+    console.log(this.props);
+    this.props.deleteCampus(e.target.value);
+    this.props.history.push('/');
+  }
+
   render () {
-    const campus = this.state.campus;
-    console.log('this.state.campus', campus);
+    const campus = this.props.campus;
+    const studentsOfCampus = this.props.studentsOfCampus;
     return (
+      <div>
+      <img src={`${campus.image}`} />
+      { campus &&
       <ul>
         <li>Name: {campus.name}</li>
         <li>ID: {campus.id}</li>
+      </ul> }
+      <hr />
+      <h2>Students of {campus.name}</h2>
+      <ul>
+      {studentsOfCampus.map(student => {
+        return <Link key={student.id} to={`/student/${student.id}`}>{student.name}</Link>
+      })}
       </ul>
+      <hr />
+      <button value={campus.id} onClick={this.onSubmitDelete}>Delete Campus</button>
+      </div>
     );
   }
 }
@@ -48,14 +65,15 @@ class CampusDetail extends Component {
 /* -----------------    CONTAINER     ------------------ */
 
 const mapState = (state, ownProps) => {
-  console.log('state in map', state);
+  console.log('mapstate prop', ownProps);
   const campuses = state.campuses;
   const students = state.students;
+  const campusId = +ownProps.match.params.campusId;
+  const studentsOfCampus = students.filter(student => {
+    return student.campusId === campusId;
+  });
   const campus = campuses.find(aCampus => aCampus.id === +ownProps.match.params.campusId);
-  const campusId = ownProps.campusId;
-  console.log(students, campuses, ownProps)
-  return {students, campuses, ownProps};
-  // return { students, campuses, ownProps };
+  return {students, studentsOfCampus, campuses, campus, ownProps};
 };
 
 const mapDispatch = (dispatch, ownProps) => {
@@ -63,8 +81,12 @@ const mapDispatch = (dispatch, ownProps) => {
 
     fetchCampusDetail: () => {
       const campusId = ownProps.match.params.campusId;
-      console.log(campusId);
       dispatch(loadCampus(campusId));
+    },
+
+    deleteCampus: () => {
+      const campusId = ownProps.match.params.campusId;
+      dispatch(removeCampus(campusId));
     }
 
   };

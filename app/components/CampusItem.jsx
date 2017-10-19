@@ -5,8 +5,6 @@ const CampusItem = ({campus}) => {
   return (
     <div>
       <Link to={`/campus/${campus.id}`}>{campus.name}</Link>
-      <button>X</button>
-      {/* <img src={`${campus.image}`} /> */}
     </div>
   );
 };

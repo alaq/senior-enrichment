@@ -31,7 +31,13 @@ studentRouter.get('/:id', (req, res) => {
 
 studentRouter.delete('/:id', (req, res) => {
 	req.requestedStudent.destroy()
-		.then(() => res.sendStatus(200))
+		.then(() => res.send(req.requestedStudent))
+		.catch(console.error);
+});
+
+studentRouter.put('/:id', (req, res) => {
+	req.requestedStudent.update(req.body.student)
+		.then(() => res.json(req.body))
 		.catch(console.error);
 });
 
