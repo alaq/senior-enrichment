@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 const StudentItem = ({student}) => {
   return (
     <div>
-      <Link to={`/students/${student.id}`}>{student.name}</Link>
+      <Link to={`/student/${student.id}`}>{student.name}</Link>
+      <button>X</button>
     </div>
   );
 };

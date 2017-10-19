@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import CampusList from './CampusList';
 import CampusDetail from './CampusDetail';
 import StudentList from './StudentList';
 import StudentDetail from './StudentDetail';
+import { connect } from 'react-redux';
+import { loadCampuses } from '../actions/campusActionCreators';
+import { loadStudents } from '../actions/studentActionCreators';
 
-const Root = () => {
+class Root extends Component {
+
+componentDidMount () {
+  this.props.fetchInitialData();
+}
+  
+
+  render () {
     return (
       <div>
         <Router>
@@ -27,6 +37,16 @@ const Root = () => {
         </Router>
       </div>
     );
+  }
 };
 
-export default Root;
+const mapProps = null;
+
+const mapDispatch = dispatch => ({
+  fetchInitialData: () => {
+    dispatch(loadCampuses());
+    dispatch(loadStudents());
+  }
+})
+
+export default connect(mapProps, mapDispatch)(Root);

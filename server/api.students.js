@@ -29,4 +29,10 @@ studentRouter.get('/:id', (req, res) => {
 	res.send(req.requestedStudent);
 });
 
+studentRouter.delete('/:id', (req, res) => {
+	req.requestedStudent.destroy()
+		.then(() => res.sendStatus(200))
+		.catch(console.error);
+});
+
 module.exports = studentRouter;

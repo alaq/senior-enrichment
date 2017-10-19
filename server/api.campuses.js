@@ -29,4 +29,10 @@ campusRouter.get('/:id', (req, res) => {
 	res.send(req.requestedCampus);
 });
 
+campusRouter.delete('/:id', (req, res) => {
+	req.requestedCampus.destroy()
+		.then(() => res.sendStatus(200))
+		.catch(console.error);
+});
+
 module.exports = campusRouter;

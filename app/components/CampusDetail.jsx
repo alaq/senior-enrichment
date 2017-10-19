@@ -1,17 +1,73 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import StudentItem from './StudentItem';
-import { loadStudents } from '../actions/studentActionCreators';
-import StudentList from './StudentList';
+import { loadCampus } from '../actions/campusActionCreators';
+import CampusList from './CampusList';
 
-export default class CampusDetail extends Component {
+class CampusDetail extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      campus: {
+        name: 'aa',
+        id: '1',
+        image: ''
+      }
+    }
+  }
+
+  componentDidMount () {
+    // here will go the function to fetch the campus details
+    this.props.fetchCampusDetail();
+  }
+
+  componentWillReceiveProps (newProps) {
+
+    if (newProps.match.params.campusId !== this.props.match.params.campusId) {
+      this.props.fetchCampusDetail();
+    }
+
+    this.setState({
+      campus: newProps.campus
+    });
+
+  }
 
   render () {
-    const campusId = this.props.match.params.campusId;
+    const campus = this.state.campus;
+    console.log('this.state.campus', campus);
     return (
-      <div>
-        <StudentList campusId={campusId} />
-      </div>
+      <ul>
+        <li>Name: {campus.name}</li>
+        <li>ID: {campus.id}</li>
+      </ul>
     );
   }
 }
+
+/* -----------------    CONTAINER     ------------------ */
+
+const mapState = (state, ownProps) => {
+  console.log('state in map', state);
+  const campuses = state.campuses;
+  const students = state.students;
+  const campus = campuses.find(aCampus => aCampus.id === +ownProps.match.params.campusId);
+  const campusId = ownProps.campusId;
+  console.log(students, campuses, ownProps)
+  return {students, campuses, ownProps};
+  // return { students, campuses, ownProps };
+};
+
+const mapDispatch = (dispatch, ownProps) => {
+  return {
+
+    fetchCampusDetail: () => {
+      const campusId = ownProps.match.params.campusId;
+      console.log(campusId);
+      dispatch(loadCampus(campusId));
+    }
+
+  };
+};
+
+export default connect(mapState, mapDispatch)(CampusDetail);
