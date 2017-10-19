@@ -11,13 +11,15 @@ class StudentDetail extends Component {
       student: {
         name: '',
         id: '',
-        email: ''
+        email: '',
+        campusId: ''
       },
       isEditOn: false
     };
     this.handleClickEdit = this.handleClickEdit.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeCampus = this.onChangeCampus.bind(this);
     this.onSubmitDelete = this.onSubmitDelete.bind(this);
   }
 
@@ -58,7 +60,8 @@ class StudentDetail extends Component {
         student: {
           name: e.target.value,
           email: this.state.student.email,
-          id: this.state.student.id
+          id: this.state.student.id,
+          campusId: this.state.campusId
         }
       }
     );
@@ -68,6 +71,19 @@ class StudentDetail extends Component {
       this.setState({
         student: {
           email: e.target.value,
+          name: this.state.student.name,
+          id: this.state.student.id,
+          campusId: this.state.campusId
+        }
+      }
+    )
+  }
+
+  onChangeCampus (e) {
+      this.setState({
+        student: {
+          campusId: e.target.value,
+          email: this.state.student.email,
           name: this.state.student.name,
           id: this.state.student.id
         }
@@ -84,6 +100,7 @@ class StudentDetail extends Component {
   render () {
     const student = this.state.student;
     const campus = this.props.campus;
+    const campuses = this.props.campuses;
     return (
       <div>
         <ul>
@@ -91,10 +108,20 @@ class StudentDetail extends Component {
           <div>
             <li><input type="text" onChange={this.onChangeName} value={student.name} /></li>
             <li><input type="text" onChange={this.onChangeEmail} value={student.email} /></li>
+            <li>
+              <select onChange={this.onChangeCampus} value={student.campusId}>
+                { campuses.map(campus => {
+                  return (
+                    <option value={campus.id} >{campus.id} - {campus.name}</option>
+                  )
+                })}
+              </select>
+            </li>
           </div> :
           <div>
             <li>Name: {student.name}</li>
             <li>Email: {student.email}</li>
+            <li>Campus ID: {student.campusId}</li>
           </div>
           }
           <button onClick={this.handleClickEdit}>{this.state.isEditOn ? 'Save Edits' : 'Edit Details'}</button>

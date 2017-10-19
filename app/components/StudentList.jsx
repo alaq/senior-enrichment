@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StudentItem from './StudentItem';
+import NewStudent from './NewStudent';
 import { connect } from 'react-redux';
 
 import { loadStudents } from '../actions/studentActionCreators';
@@ -15,6 +16,8 @@ class StudentList extends Component {
     return (
       <div>
           {students && students.map(student => <StudentItem key={student.id} student={student} />)}
+          <h2>New Student</h2>
+          <NewStudent />
       </div>
     );
   }

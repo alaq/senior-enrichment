@@ -52,7 +52,7 @@ class CampusDetail extends Component {
       <h2>Students of {campus.name}</h2>
       <ul>
       {studentsOfCampus.map(student => {
-        return <Link key={student.id} to={`/student/${student.id}`}>{student.name}</Link>
+        return <li key={student.id}><Link key={student.id} to={`/student/${student.id}`}>{student.name}</Link></li>
       })}
       </ul>
       <hr />
