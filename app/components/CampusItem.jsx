@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const CampusItem = ({campus}) => {
   return (
     <div>
-      <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
+      <Link to={`/campus/${campus.id}`}>{campus.name}</Link>
       {/* <img src={`${campus.image}`} /> */}
     </div>
   );

@@ -4,7 +4,7 @@ import createLogger from 'redux-logger'; // https://github.com/evgenyrodionov/re
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
 
 import { GET_CAMPUSES } from './actions/campusActionCreators';
-import { GET_STUDENTS } from './actions/studentActionCreators';
+import { GET_STUDENTS, GET_STUDENTS_OF_CAMPUS } from './actions/studentActionCreators';
 
 const initialState = {
   campuses: [],

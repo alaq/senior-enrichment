@@ -1,8 +1,8 @@
 'use strict';
 
 var Sequelize = require('sequelize');
-
 var db = require('../index');
+var Student = require('./student');
 
 var Campus = db.define('campus', {
   name: {
@@ -17,6 +17,11 @@ var Campus = db.define('campus', {
     validate: {
       isUrl: true
     }
+  }
+},
+{
+  defaultScope: {
+    include: [Student]
   }
 });
 

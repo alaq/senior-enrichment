@@ -7,12 +7,13 @@ import { loadStudents } from '../actions/studentActionCreators';
 class StudentList extends Component {
 
   componentDidMount() {
-    this.props.fetchStudents();
+    this.props.fetchStudents(this.props.campusId);
   }
 
   render () {
     const { students } = this.props;
-    return (
+    console.log('students:', students);
+    return ( 
       <div>
           <h1>List of students</h1>
           {students && students.map(student => <StudentItem key={student.id} student={student} />)}
@@ -22,11 +23,11 @@ class StudentList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  students: state.students,
+  students: state.students
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchStudents: () => dispatch(loadStudents()),
+  fetchStudents: () => dispatch(loadStudents())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentList);

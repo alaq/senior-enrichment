@@ -19,11 +19,13 @@ Student.getAll = function () {
 };
 
 Student.getAllOnCampus = function (campusId) {
-  return this.findAll({
-    where: {
-      campusId: campusId
-    }
-  });
+  return this.findAll(
+    // {
+    // where: {
+    //   campusId: campusId
+    // }
+    // }
+);
 };
 
 module.exports = Student;

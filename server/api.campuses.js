@@ -1,6 +1,6 @@
 const campusRouter = require('express').Router();
 
-const { Campus } = require('../db/models');
+const { Campus, Student } = require('../db/models');
 
 
 campusRouter.param('id', (req, res, next, id) => {
