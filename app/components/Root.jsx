@@ -44,9 +44,6 @@ componentDidMount () {
         </Router>
       </div>
     );
-
-
-
   }
 }
 

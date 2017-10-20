@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 const StudentItem = ({student}) => {
 
   return (
-    <div>
+    <li>
       <Link to={`/student/${student.id}`}>{student.name}</Link>
-    </div>
+    </li>
   );
 };
 

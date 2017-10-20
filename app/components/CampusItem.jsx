@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const CampusItem = ({campus}) => {
   return (
-    <div>
+    <li>
       <Link to={`/campus/${campus.id}`}>{campus.name}</Link>
-    </div>
+    </li>
   );
 };
 

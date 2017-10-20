@@ -22,9 +22,11 @@ class NewCampus extends Component {
   render() {
     return (
       <form onSubmit={this.onCampusSubmit}>
+      <ul>
         <li><label>Name</label><input name="name" type="text" /></li>
         <li><label>Image (url)</label><input name="image" type="text" /></li>
         <button type="submit">Create new Campus</button>
+      </ul>
       </form>
     );
   }

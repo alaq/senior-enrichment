@@ -7,10 +7,15 @@ import StudentList from './StudentList';
 
 class CampusDetail extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      isEditOn: false
+      isEditOn: false,
+      campus: {
+        name: '',
+        id: '',
+        image: ''
+      }
     }
     this.handleClickEdit = this.handleClickEdit.bind(this);
     this.onSubmitDelete = this.onSubmitDelete.bind(this);
@@ -18,13 +23,13 @@ class CampusDetail extends Component {
   }
 
 
-  componentDidMount () {
+  componentDidMount() {
     // here will go the function to fetch the campus details
-    this.props.fetchCampuses();
     this.props.fetchCampusDetail();
+    console.log('fetched!');
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
 
     if (newProps.match.params.campusId !== this.props.match.params.campusId) {
       this.props.fetchCampusDetail();
@@ -36,46 +41,46 @@ class CampusDetail extends Component {
 
   }
 
-  handleClickEdit () {
+  handleClickEdit() {
     this.setState(prevState => (
       {
         isEditOn: !prevState.isEditOn
-    }));
+      }));
 
 
-    if (!this.state.idEditOn)  {
+    if (!this.state.idEditOn) {
       this.props.editCampus(this.state.campus);
     }
 
   }
 
-  onChangeName (e) {
+  onChangeName(e) {
     // console.log(this.state.campus)
     const newState = this.state.campus;
     newState.name = e.target.value;
-      this.setState({
-        campus: newState
-      }
+    this.setState({
+      campus: newState
+    }
     );
   }
 
-  onChangeImage (e) {
+  onChangeImage(e) {
     const newState = this.state.campus;
     newState.image = e.target.value;
-      this.setState({
-        campus: newState
-      }
+    this.setState({
+      campus: newState
+    }
     );
   }
 
-  onSubmitDelete (e) {
+  onSubmitDelete(e) {
     // console.dir(e.target.value);
     console.log(this.props);
     this.props.deleteCampus(e.target.value);
     this.props.history.push('/');
   }
 
-  render () {
+  render() {
     const campus = this.props.campus;
     console.log('props', this.props);
     console.log('state', this.state);
@@ -83,41 +88,41 @@ class CampusDetail extends Component {
     return (
 
       <div>
-        <ul>
-          {this.state.isEditOn ?
+        {campus &&
           <div>
-            <li><input type="text" onChange={this.onChangeName} value={campus.name} /></li>
-            <li><input type="text" onChange={this.onChangeImage} value={campus.image} /></li>
-          </div> :
-          <div>
-            <img src={`${campus.image}`} />
-            <li>Name: {campus.name}</li>
-            <li>ID: {campus.id}</li>
+            <ul>
+              {this.state.isEditOn ?
+                <div>
+                  <li><input type="text" onChange={this.onChangeName} value={campus.name} /></li>
+                  <li><input type="text" onChange={this.onChangeImage} value={campus.image} /></li>
+                </div> :
+                <div>
+                  <img src={`${campus.image}`} />
+                  <li>Name: {campus.name}</li>
+                  <li>ID: {campus.id}</li>
+                </div>
+              }
+              <button onClick={this.handleClickEdit}>{this.state.isEditOn ? 'Save Edits' : 'Edit Details'}</button>
+            </ul>
+            <hr />
+<div>┏━┳┓╋╋╋┏┓╋╋╋╋┏┓┏━┓</div>
+<div>┃━┫┗┳┳┳┛┣━┳━┳┫┗┫━┫</div>
+<div>┣━┃┏┫┃┃╋┃┻┫┃┃┃┏╋━┃ of {campus.name}, they are {studentsOfCampus.length}</div>
+<div>┗━┻━┻━┻━┻━┻┻━┻━┻━┛</div>
+
+            <ul>
+              {studentsOfCampus.map(student => {
+                return <li key={student.id}><Link key={student.id} to={`/student/${student.id}`}>{student.name}</Link></li>
+              })}
+            </ul>
+            <hr />
+            <button value={campus.id} onClick={this.onSubmitDelete}>Delete Campus</button>
+
           </div>
-          }
-          <button onClick={this.handleClickEdit}>{this.state.isEditOn ? 'Save Edits' : 'Edit Details'}</button>
-        </ul>
-        <hr />
-        <h2>Students of {campus.name}</h2>
-        <ul>
-        {studentsOfCampus.map(student => {
-          return <li key={student.id}><Link key={student.id} to={`/student/${student.id}`}>{student.name}</Link></li>
-        })}
-        </ul>
-        <hr />
-        <button value={campus.id} onClick={this.onSubmitDelete}>Delete Campus</button>
 
+
+        }
       </div>
-
-          // <div>
-          // <img src={`${campus.image}`} />
-          // { campus &&
-          // <ul>
-          //   <li>Name: {campus.name}</li>
-          //   <li>ID: {campus.id}</li>
-          // </ul> }
-          // </div>
-
 
 
 
@@ -137,7 +142,7 @@ const mapState = (state, ownProps) => {
     return student.campusId === campusId;
   });
   const campus = campuses.find(aCampus => aCampus.id === +ownProps.match.params.campusId);
-  return {students, studentsOfCampus, campuses, isEditOn, campus, ownProps};
+  return { students, studentsOfCampus, campuses, isEditOn, campus, ownProps };
 };
 
 const mapDispatch = (dispatch, ownProps) => {

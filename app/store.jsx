@@ -8,7 +8,7 @@ import { GET_STUDENTS, GET_STUDENT, REMOVE_STUDENT, UPDATE_STUDENT, NEW_STUDENT 
 
 const initialState = {
   campuses: [],
-  students: []
+  students: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
     case REMOVE_CAMPUS:
       console.log(action.payload.id);
       return Object.assign({}, state, {campuses: state.campuses.filter(campus => campus.id !== action.payload.id)});
-    
+
       case UPDATE_CAMPUS:
       return state.campus.map(campus => (
         action.payload.campus.id === campus.id ? action.payload.campus : campus

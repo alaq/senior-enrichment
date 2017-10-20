@@ -103,6 +103,10 @@ class StudentDetail extends Component {
     const campuses = this.props.campuses;
     return (
       <div>
+        <div>┏━┳┓╋╋╋┏┓╋╋╋╋┏┓</div>
+        <div>┃━┫┗┳┳┳┛┣━┳━┳┫┗┓</div>
+        <div>┣━┃┏┫┃┃╋┃┻┫┃┃┃┏┫</div>
+        <div>┗━┻━┻━┻━┻━┻┻━┻━┛</div>
         <ul>
           {this.state.isEditOn ?
           <div>
@@ -127,6 +131,12 @@ class StudentDetail extends Component {
           <button onClick={this.handleClickEdit}>{this.state.isEditOn ? 'Save Edits' : 'Edit Details'}</button>
         </ul>
         <hr />
+          <div>╋╋╋╋╋╋╋╋╋╋╋╋┏━┓</div>
+          <div>┏━┳━┓┏━━┳━┳┳┫━┫</div>
+          <div>┃━┫╋┗┫┃┃┃╋┃┃┣━┃</div>
+          <div>┗━┻━━┻┻┻┫┏┻━┻━┛</div>
+          <div>╋╋╋╋╋╋╋╋┗┛</div>
+
         { campus &&
           <div>
             <ul>

@@ -21,10 +21,22 @@ class CampusList extends Component {
     const { campuses } = this.props;
     return (
       <div>
-          <h2>List of campuses ({campuses.length})</h2>
+
+<div>╋╋┏┳━┳┓╋╋╋┏━┓╋╋╋╋╋╋╋╋╋╋╋╋┏━┓╋┏━┓</div>
+<div>┏┓┣┫━┫┗┓┏━┫━┫┏━┳━┓┏━━┳━┳┳┫━╋━┫━┫</div>
+<div>┃┗┫┣━┃┏┫┃╋┃┏┛┃━┫╋┗┫┃┃┃╋┃┃┣━┃┻╋━┃ there are {campuses.length} of them.</div>
+<div>┗━┻┻━┻━┛┗━┻┛╋┗━┻━━┻┻┻┫┏┻━┻━┻━┻━┛</div>
+<div>╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋┗┛</div>
+
+<ul>
           {campuses && campuses.map(campus => <CampusItem key={campus.id} campus={campus} />)}
+</ul>
           <hr />
-          <h2>New campus</h2>
+<div>╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋┏━┓</div>
+<div>┏━┳┳━┳┳┳┓┏━┳━┓┏━━┳━┳┳┫━┫</div>
+<div>┃┃┃┃┻┫┃┃┃┃━┫╋┗┫┃┃┃╋┃┃┣━┃</div>
+<div>┗┻━┻━┻━━┛┗━┻━━┻┻┻┫┏┻━┻━┛</div>
+<div>╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋╋┗┛</div>
           <NewCampus />
       </div>
     );

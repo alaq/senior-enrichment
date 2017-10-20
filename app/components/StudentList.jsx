@@ -17,10 +17,19 @@ class StudentList extends Component {
     const { students } = this.props;
     return (
       <div>
-          <h2>List of students ({students.length})</h2>
+<div>┏┓┏┳━┳┓╋╋╋┏━┓┏━┳┓╋╋╋┏┓╋╋╋╋┏┓┏━┓</div>
+<div>┃┃┣┫━┫┗┓┏━┫━┫┃━┫┗┳┳┳┛┣━┳━┳┫┗┫━┫</div>
+<div>┃┗┫┣━┃┏┫┃╋┃┏┛┣━┃┏┫┃┃╋┃┻┫┃┃┃┏╋━┃ there are {students.length} of them.</div>
+<div>┗━┻┻━┻━┛┗━┻┛╋┗━┻━┻━┻━┻━┻┻━┻━┻━┛</div>
+<ul>
           {students && students.map(student => <StudentItem key={student.id} student={student} />)}
+</ul>
           <hr />
-          <h2>New Student</h2>
+<div>╋╋╋╋╋╋╋╋╋┏━┳┓╋╋╋┏┓╋╋╋╋┏┓</div>
+<div>┏━┳┳━┳┳┳┓┃━┫┗┳┳┳┛┣━┳━┳┫┗┓</div>
+<div>┃┃┃┃┻┫┃┃┃┣━┃┏┫┃┃╋┃┻┫┃┃┃┏┫</div>
+<div>┗┻━┻━┻━━┛┗━┻━┻━┻━┻━┻┻━┻━┛</div>
+
           <NewStudent />
       </div>
     );
