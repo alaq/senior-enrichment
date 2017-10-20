@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadCampus, removeCampus, updateCampus } from '../actions/campusActionCreators';
+import { loadCampus, removeCampus, updateCampus, loadCampuses } from '../actions/campusActionCreators';
 import CampusList from './CampusList';
 import StudentList from './StudentList';
 
@@ -20,6 +20,7 @@ class CampusDetail extends Component {
 
   componentDidMount () {
     // here will go the function to fetch the campus details
+    this.props.fetchCampuses();
     this.props.fetchCampusDetail();
   }
 
@@ -76,6 +77,8 @@ class CampusDetail extends Component {
 
   render () {
     const campus = this.props.campus;
+    console.log('props', this.props);
+    console.log('state', this.state);
     const studentsOfCampus = this.props.studentsOfCampus;
     return (
 
@@ -103,7 +106,7 @@ class CampusDetail extends Component {
         </ul>
         <hr />
         <button value={campus.id} onClick={this.onSubmitDelete}>Delete Campus</button>
-       
+
       </div>
 
           // <div>
@@ -139,6 +142,10 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
+
+    fetchCampuses: () => {
+      dispatch(loadCampuses());
+    },
 
     fetchCampusDetail: () => {
       const campusId = ownProps.match.params.campusId;

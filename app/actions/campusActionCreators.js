@@ -47,7 +47,6 @@ export const newCampus = (campus) => dispatch => {
   axios.post('/api/campus/', {campus})
     .then(response => response.data)
     .then(data => {
-      console.log('response from backend', data);
       dispatch({type: NEW_CAMPUS, payload: data });
     })
     .catch(error => console.log(error));

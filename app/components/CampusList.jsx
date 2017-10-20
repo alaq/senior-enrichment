@@ -11,12 +11,19 @@ class CampusList extends Component {
   //   this.props.fetchCampuses();
   // }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.campuses.length !== this.props.campuses.length) {
+      this.props.fetchCampuses();
+    }
+  }
+
   render () {
     const { campuses } = this.props;
     return (
       <div>
           <h2>List of campuses ({campuses.length})</h2>
           {campuses && campuses.map(campus => <CampusItem key={campus.id} campus={campus} />)}
+          <hr />
           <h2>New campus</h2>
           <NewCampus />
       </div>
@@ -29,7 +36,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetchCampuses: () => dispatch(loadCampuses()),
+  fetchCampuses: () => dispatch(loadCampuses()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CampusList);
