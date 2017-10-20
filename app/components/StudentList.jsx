@@ -15,6 +15,7 @@ class StudentList extends Component {
     const { students } = this.props;
     return (
       <div>
+          <h2>List of students ({students.length})</h2>
           {students && students.map(student => <StudentItem key={student.id} student={student} />)}
           <h2>New Student</h2>
           <NewStudent />

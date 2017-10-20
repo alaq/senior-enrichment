@@ -4,6 +4,7 @@ export const GET_STUDENTS = 'GET_STUDENTS';
 export const GET_STUDENT = 'GET_STUDENT';
 export const UPDATE_STUDENT = 'UPDATE_STUDENT';
 export const REMOVE_STUDENT = 'REMOVE_STUDENT';
+export const NEW_STUDENT = 'NEW_STUDENT';
 
 export const loadStudents = () => dispatch => {
   axios.get('/api/student/')
@@ -40,4 +41,13 @@ export const updateStudent = (student) => dispatch => {
     dispatch({type: UPDATE_STUDENT, payload: data });
   })
   .catch(error => console.log(error));
+};
+
+export const newStudent = (student) => dispatch => {
+  axios.post('/api/student/', {student})
+    .then(response => response.data)
+    .then(data => {
+      dispatch({type: NEW_STUDENT, payload: data });
+    })
+    .catch(error => console.log(error));
 };

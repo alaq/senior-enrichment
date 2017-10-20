@@ -7,15 +7,15 @@ import { loadCampuses } from '../actions/campusActionCreators';
 
 class CampusList extends Component {
 
-  componentDidMount() {
-    this.props.fetchCampuses();
-  }
+  // componentDidMount() {
+  //   this.props.fetchCampuses();
+  // }
 
   render () {
     const { campuses } = this.props;
     return (
       <div>
-          <h2>List of campuses</h2>
+          <h2>List of campuses ({campuses.length})</h2>
           {campuses && campuses.map(campus => <CampusItem key={campus.id} campus={campus} />)}
           <h2>New campus</h2>
           <NewCampus />
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCampuses: () => dispatch(loadCampuses()),
+  // fetchCampuses: () => dispatch(loadCampuses()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CampusList);

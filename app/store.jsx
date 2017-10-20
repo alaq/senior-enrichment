@@ -3,8 +3,8 @@ import { createStore, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
 
-import { GET_CAMPUSES, GET_CAMPUS, NEW_CAMPUS, REMOVE_CAMPUS } from './actions/campusActionCreators';
-import { GET_STUDENTS, GET_STUDENT, REMOVE_STUDENT, UPDATE_STUDENT } from './actions/studentActionCreators';
+import { GET_CAMPUSES, GET_CAMPUS, NEW_CAMPUS, REMOVE_CAMPUS, UPDATE_CAMPUS } from './actions/campusActionCreators';
+import { GET_STUDENTS, GET_STUDENT, REMOVE_STUDENT, UPDATE_STUDENT, NEW_STUDENT } from './actions/studentActionCreators';
 
 const initialState = {
   campuses: [],
@@ -27,7 +27,13 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {campuses: [action.payload, ...state.campuses]});
 
     case REMOVE_CAMPUS:
-      return Object.assign({}, state, {campuses: state.campuses.filter(campus => campus.campusId !== action.payload.campusId)});
+      console.log(action.payload.id);
+      return Object.assign({}, state, {campuses: state.campuses.filter(campus => campus.id !== action.payload.id)});
+    
+      case UPDATE_CAMPUS:
+      return state.campus.map(campus => (
+        action.payload.campus.id === campus.id ? action.payload.campus : campus
+      ));
 
     // STUDENTS
     case GET_STUDENTS:
@@ -46,6 +52,10 @@ const reducer = (state = initialState, action) => {
 
     case REMOVE_STUDENT:
       return Object.assign({}, state, {students: state.students.filter(student => student.id !== action.payload.id)});
+
+    case NEW_STUDENT:
+      return Object.assign({}, state, {students: [action.payload, ...state.students]});
+
 
     default:
       return state;

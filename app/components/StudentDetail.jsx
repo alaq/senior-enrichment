@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { loadStudent, removeStudent, updateStudent } from '../actions/studentActionCreators';
+import { loadStudent, removeStudent, updateStudent, editStudent } from '../actions/studentActionCreators';
 
 class StudentDetail extends Component {
 
@@ -48,7 +48,7 @@ class StudentDetail extends Component {
 
     console.log(this.state);
 
-    if (this.state.idEditOn !== 'ddddd')  {
+    if (!this.state.idEditOn)  {
       console.log(this.state.student);
       this.props.editStudent(this.state.student);
     }

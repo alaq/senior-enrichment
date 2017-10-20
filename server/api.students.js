@@ -41,4 +41,13 @@ studentRouter.put('/:id', (req, res) => {
 		.catch(console.error);
 });
 
+studentRouter.post('/', (req, res) => {
+	Student.create(req.body.student)
+		.then((what) => {
+			console.log('response from db', what);
+			res.json(req.body)
+		})
+		.catch(console.error);
+});
+
 module.exports = studentRouter;

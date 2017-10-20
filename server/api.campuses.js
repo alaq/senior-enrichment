@@ -12,6 +12,7 @@ campusRouter.param('id', (req, res, next, id) => {
 				throw err;
 			}
 			req.requestedCampus = campus;
+			console.log('campus found', campus);
 			next();
 		})
 		.catch(next);
@@ -34,5 +35,26 @@ campusRouter.delete('/:id', (req, res) => {
 		.then(() => res.send(req.requestedCampus))
 		.catch(console.error);
 });
+
+campusRouter.put('/:id', (req, res) => {
+	console.log(req.body.campus);
+	req.requestedCampus.update(req.body.campus)
+		.then((what) => {
+			console.log('response from db', what);
+			res.json(req.body)
+		})
+		.catch(console.error);
+});
+
+campusRouter.post('/', (req, res) => {
+	console.log(req.body);
+	Campus.create(req.body.campus)
+		.then((what) => {
+			console.log('response from db', what);
+			res.json(req.body)
+		})
+		.catch(console.error);
+});
+
 
 module.exports = campusRouter;
